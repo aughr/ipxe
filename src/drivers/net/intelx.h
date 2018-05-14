@@ -62,10 +62,12 @@ FILE_LICENCE ( GPL2_OR_LATER_OR_UBDL );
  */
 #define INTELX_RAL0 0x05400UL
 #define INTELX_RAL0_ALT 0x0a200UL
+#define INTELX_RAL0_ALT_2 0x001E2120UL
 
 /** Receive Address High */
 #define INTELX_RAH0 0x05404UL
 #define INTELX_RAH0_ALT 0x0a204UL
+#define INTELX_RAH0_ALT_2 0x001E2140UL
 #define INTELX_RAH0_AV		0x80000000UL	/**< Address valid */
 
 /** Receive Descriptor register block */

@@ -99,6 +99,12 @@ static int intelx_fetch_mac ( struct intel_nic *intel, uint8_t *hw_addr ) {
 		return 0;
 	}
 
+	/* Try to fetch address from INTELX_RAL0_ALT_2 */
+	if ( ( rc = intelx_try_fetch_mac ( intel, INTELX_RAL0_ALT_2,
+					   hw_addr ) ) == 0 ) {
+		return 0;
+	}
+
 	DBGC ( intel, "INTEL %p has no MAC address to use\n", intel );
 	return -ENOENT;
 }
@@ -202,6 +208,8 @@ static int intelx_open ( struct net_device *netdev ) {
 	writel ( rah0, intel->regs + INTELX_RAH0 );
 	writel ( ral0, intel->regs + INTELX_RAL0_ALT );
 	writel ( rah0, intel->regs + INTELX_RAH0_ALT );
+	writel ( ral0, intel->regs + INTELX_RAL0_ALT_2 );
+	writel ( rah0, intel->regs + INTELX_RAH0_ALT_2 );
 
 	/* Allocate interrupt vectors */
 	writel ( ( INTELX_IVAR_RX0_DEFAULT | INTELX_IVAR_RX0_VALID |
