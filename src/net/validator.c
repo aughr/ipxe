@@ -506,10 +506,10 @@ static void validator_step ( struct validator *validator ) {
 	 * nothing more to do.
 	 */
 	last = x509_last ( validator->chain );
-	if ( asn1_compare ( &last->issuer.raw, &last->subject.raw ) == 0 ) {
-		validator_finished ( validator, rc );
-		return;
-	}
+	/*if ( asn1_compare ( &last->issuer.raw, &last->subject.raw ) == 0 ) {*/
+		/*validator_finished ( validator, rc );*/
+		/*return;*/
+	/*}*/
 
 	/* Otherwise, try to download a suitable cross-signing
 	 * certificate.
