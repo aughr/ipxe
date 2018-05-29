@@ -502,18 +502,11 @@ static void validator_step ( struct validator *validator ) {
 		return;
 	}
 
-	/* If chain ends with a self-issued certificate, then there is
-	 * nothing more to do.
+	/* Otherwise, try to download a suitable cross-signing certificate. This
+	 * happens even if the chain ends with a self-signed cert, because some
+	 * chains include the root that they're signed with.
 	 */
 	last = x509_last ( validator->chain );
-	if ( asn1_compare ( &last->issuer.raw, &last->subject.raw ) == 0 ) {
-		validator_finished ( validator, rc );
-		return;
-	}
-
-	/* Otherwise, try to download a suitable cross-signing
-	 * certificate.
-	 */
 	if ( ( rc = validator_start_download ( validator,
 					       &last->issuer.raw ) ) != 0 ) {
 		validator_finished ( validator, rc );
